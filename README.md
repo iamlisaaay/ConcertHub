@@ -47,6 +47,12 @@ An interactive full-stack web application designed for concert discovery, ticket
 * [.NET 8.0 SDK](https://dotnet.microsoft.com/download)
 * [PostgreSQL](https://www.postgresql.org/)
 
+
+---
+
+## 📸 Screenshots
+
+![Dashboard Screenshot](посилання_або_шлях_до_картинки)
 ### Quick Run
 
 1. **Clone the repository:**
