@@ -52,7 +52,11 @@ An interactive full-stack web application designed for concert discovery, ticket
 
 ## 📸 Screenshots
 
-![Dashboard Screenshot](посилання_або_шлях_до_картинки)
+![Dashboard Screenshot]<img width="1917" height="1078" alt="Снимок экрана 2026-09-17 163416" src="https://github.com/user-attachments/assets/08424f42-bdf8-42c9-8cb0-a80c6e913086" />
+<img width="1917" height="1078" alt="Снимок экрана 2026-09-17 163409" src="https://github.com/user-attachments/assets/3abbd861-0035-4da7-8e00-a99949ee9e21" />
+<img width="1917" height="1078" alt="Снимок экрана 2026-09-17 163344" src="https://github.com/user-attachments/assets/38656064-4415-421d-ba35-a2ccd8efcd06" />
+<img width="1917" height="1078" alt="Снимок экрана 2026-09-17 163337" src="https://github.com/user-attachments/assets/08c01b31-3a6d-4d9e-b93e-95257b7e5a55" />
+
 ### Quick Run
 
 1. **Clone the repository:**
