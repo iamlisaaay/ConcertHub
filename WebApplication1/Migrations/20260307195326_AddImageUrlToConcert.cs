@@ -7,7 +7,6 @@ namespace Concert.Migrations
 {
     public partial class AddImageUrlToConcert : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
            
@@ -18,7 +17,6 @@ namespace Concert.Migrations
                 nullable: true);
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
            

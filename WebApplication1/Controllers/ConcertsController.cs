@@ -15,14 +15,12 @@ namespace Concert.Controllers
         private readonly ConcertContext _context;
         private readonly IDataPortServiceFactory<Concert.Models.Concert> _portFactory;
 
-        // ЗАЛИШАЄМО ТІЛЬКИ ОДИН КОНСТРУКТОР, ЯКИЙ ПРИЙМАЄ ОБИДВА ПАРАМЕТРИ
         public ConcertsController(ConcertContext context, IDataPortServiceFactory<Concert.Models.Concert> portFactory)
         {
             _context = context;
             _portFactory = portFactory;
         }
 
-        // GET: Concerts
         public async Task<IActionResult> Index()
         {
             var concertContext = _context.Concerts
@@ -35,8 +33,6 @@ namespace Concert.Controllers
 
         public IActionResult RevenueChart() => View();
 
-        // GET: Concerts/Details/5
-        // GET: Concerts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -44,16 +40,13 @@ namespace Concert.Controllers
             var concert = await _context.Concerts
                 .Include(c => c.Venue)
                 .Include(c => c.Groups)
-                .Include(c => c.Comments)                 // ДОДАЛИ: Підвантажуємо коментарі
-                    .ThenInclude(com => com.Customer)     // ДОДАЛИ: Підвантажуємо авторів коментарів, щоб вивести ім'я
-                .FirstOrDefaultAsync(m => m.ConcertId == id);
+                .Include(c => c.Comments)                    .ThenInclude(com => com.Customer)                .FirstOrDefaultAsync(m => m.ConcertId == id);
 
             if (concert == null) return NotFound();
 
             return View(concert);
         }
 
-        // GET: Concerts/Create
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
@@ -62,7 +55,6 @@ namespace Concert.Controllers
             return View();
         }
 
-        // POST: Concerts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -110,7 +102,6 @@ namespace Concert.Controllers
             return View(concert);
         }
 
-        // GET: Concerts/Edit/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -129,7 +120,6 @@ namespace Concert.Controllers
             return View(concert);
         }
 
-        // POST: Concerts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -199,7 +189,6 @@ namespace Concert.Controllers
             return View(concert);
         }
 
-        // GET: Concerts/Delete/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -214,7 +203,6 @@ namespace Concert.Controllers
             return View(concert);
         }
 
-        // POST: Concerts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -232,7 +220,6 @@ namespace Concert.Controllers
 
         private bool ConcertExists(int id) => _context.Concerts.Any(e => e.ConcertId == id);
 
-        // МЕТОДИ ДЛЯ ІМПОРТУ ТА ЕКСПОРТУ
         [HttpGet]
         [Authorize(Roles = "Admin")]
 
@@ -246,17 +233,13 @@ namespace Concert.Controllers
             var service = _portFactory.GetImportService(fileExcel.ContentType);
             using var stream = fileExcel.OpenReadStream();
 
-            // Отримуємо помилки від сервісу
             var importErrors = await service.ImportFromStreamAsync(stream, ct);
 
-            // Якщо є хоча б одна помилка, повертаємося на сторінку імпорту і показуємо їх
             if (importErrors != null && importErrors.Any())
             {
                 ViewBag.Errors = importErrors;
-                return View(); // Повертаємо ту саму в'юшку "Import.cshtml"
-            }
+                return View();            }
 
-            // Якщо помилок немає, йдемо на Index
             return RedirectToAction(nameof(Index));
         }
         [Authorize(Roles = "Admin")]

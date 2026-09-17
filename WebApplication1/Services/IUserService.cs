@@ -1,4 +1,4 @@
-﻿namespace Concert.Services // Заміни Concert на назву свого проєкту
+﻿namespace Concert.Services 
 {
     public interface IUserService
     {

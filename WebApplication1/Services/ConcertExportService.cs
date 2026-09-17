@@ -23,7 +23,6 @@ public class ConcertExportService : IExportService<Concert.Models.Concert>
         using var workbook = new XLWorkbook();
         var ws = workbook.Worksheets.Add("Концерти");
 
-        // Заголовки таблиці
         ws.Cell(1, 1).Value = "Назва";
         ws.Cell(1, 2).Value = "Дата";
         ws.Cell(1, 3).Value = "Майданчик";
@@ -42,7 +41,7 @@ public class ConcertExportService : IExportService<Concert.Models.Concert>
             rowIdx++;
         }
 
-        ws.Columns().AdjustToContents(); // Автопідбір ширини колонок
+        ws.Columns().AdjustToContents();
         workbook.SaveAs(stream);
     }
 }

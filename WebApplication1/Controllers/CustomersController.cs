@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Concert.Controllers
 {
-    // ЗАХИСТ: Доступ до цієї сторінки має ТІЛЬКИ Адміністратор
     [Authorize(Roles = "Admin")]
     public class CustomersController : Controller
     {
@@ -21,13 +20,11 @@ namespace Concert.Controllers
             _context = context;
         }
 
-        // GET: Customers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Customers.ToListAsync());
         }
 
-        // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -40,16 +37,13 @@ namespace Concert.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // ДОДАНО: Password та IsAdmin, щоб їх можна було зберегти при створенні
         public async Task<IActionResult> Create([Bind("CustomerId,FullName,BirthDate,LoyaltyDiscount,Email,Password,IsAdmin")] Customer customer)
         {
             ModelState.Remove("Tickets");
@@ -63,7 +57,6 @@ namespace Concert.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -74,7 +67,6 @@ namespace Concert.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
      
@@ -93,14 +85,12 @@ namespace Concert.Controllers
                     var existingCustomer = await _context.Customers.FindAsync(id);
                     if (existingCustomer == null) return NotFound();
 
-                    // Оновлюємо ТІЛЬКИ ті поля, що прийшли з форми
                     existingCustomer.FullName = customer.FullName;
                     existingCustomer.BirthDate = customer.BirthDate;
                     existingCustomer.Email = customer.Email;
                     existingCustomer.LoyaltyDiscount = customer.LoyaltyDiscount;
                     existingCustomer.IsAdmin = customer.IsAdmin;
 
-                    // Зберігаємо зміни
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -113,7 +103,6 @@ namespace Concert.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -126,7 +115,6 @@ namespace Concert.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

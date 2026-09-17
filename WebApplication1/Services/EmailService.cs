@@ -8,7 +8,6 @@ public class EmailService
 {
     public async Task SendEmailAsync(string toEmail, string subject, string message)
     {
-        // ЗАМІНИ НА СВОЮ ПОШТУ ТА 16-ЗНАЧНИЙ ПАРОЛЬ ДОДАТКА З GOOGLE
         var fromAddress = new MailAddress("nastia.domra@gmail.com", "ConcertApp Support");
         var toAddress = new MailAddress(toEmail);
         const string fromPassword = "kgzb kctu cizy lcvc"; 

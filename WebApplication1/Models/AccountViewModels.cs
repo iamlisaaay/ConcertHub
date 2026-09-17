@@ -36,7 +36,6 @@ public class RegisterViewModel
     public string ConfirmPassword { get; set; } = null!;
 }
 
-// --- НОВІ МОДЕЛІ ---
 
 public class ForgotPasswordViewModel
 {

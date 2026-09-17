@@ -4,10 +4,8 @@
 
 namespace Concert.Migrations
 {
-    /// <inheritdoc />
     public partial class AddAuthToCustomer : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<int>(
@@ -45,7 +43,6 @@ namespace Concert.Migrations
                 defaultValue: "");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(

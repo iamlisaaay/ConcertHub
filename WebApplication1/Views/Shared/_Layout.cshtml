@@ -84,7 +84,6 @@
                     <ul class="navbar-nav ms-auto">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            // 1. Отримуємо URL аватарки "на льоту"
                             var avatarUrl = await UserService.GetAvatarUrlAsync(User.Identity.Name);
 
                             <li class="nav-item">

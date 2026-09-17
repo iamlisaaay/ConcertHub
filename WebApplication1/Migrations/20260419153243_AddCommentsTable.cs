@@ -6,10 +6,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Concert.Migrations
 {
-    /// <inheritdoc />
     public partial class AddCommentsTable : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -51,7 +49,6 @@ namespace Concert.Migrations
                 column: "CustomerId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

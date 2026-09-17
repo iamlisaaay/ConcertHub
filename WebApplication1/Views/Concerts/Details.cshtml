@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = Model.Title;
 
-    // ЛОГІКА ДЛЯ БЕЙДЖА СТАТУСУ
     string statusText = "Невідомо";
     string statusClass = "badge-past";
     string statusIcon = "⚪";
@@ -297,7 +296,6 @@
    <div class="comments-list">
     @if (Model.Comments != null && Model.Comments.Any())
     {
-        // Отримуємо ID поточного користувача для перевірки прав
         var currentUserId = User.FindFirst("UserId")?.Value;
         var isAdmin = User.IsInRole("Admin");
 
@@ -374,7 +372,6 @@
 
 @section Scripts {
     <script>
-        // Функція для перемикання форми редагування
         function toggleEdit(commentId) {
             var textElement = document.getElementById('comment-text-' + commentId);
             var formElement = document.getElementById('edit-form-' + commentId);
@@ -388,7 +385,6 @@
             }
         }
 
-        // Твій існуючий код для 3D карток
         document.querySelectorAll('.holographic-card').forEach(card => {
             const inner = card.querySelector('.holographic-card__inner');
 

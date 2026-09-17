@@ -100,7 +100,6 @@ public class AccountController : Controller
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
     }
 
-    // --- ВІДНОВЛЕННЯ ПАРОЛЯ ---
     public IActionResult ForgotPassword() => View();
 
     [HttpPost]
@@ -155,7 +154,6 @@ public class AccountController : Controller
         return RedirectToAction("Login");
     }
 
-    // --- ЗМІНА ПАРОЛЯ В КАБІНЕТІ ---
     [Authorize]
     public IActionResult ChangePassword() => View();
 
@@ -183,7 +181,6 @@ public class AccountController : Controller
 
         return RedirectToAction("Index", "Home");
     }
-    // 1. Сторінка профілю
     [Authorize]
     public async Task<IActionResult> Profile()
     {
@@ -192,7 +189,6 @@ public class AccountController : Controller
         return View(user);
     }
 
-    // 2. Редагування даних (GET)
     [Authorize]
     public async Task<IActionResult> EditProfile()
     {
@@ -208,7 +204,6 @@ public class AccountController : Controller
         return View(model);
     }
 
-    // 3. Редагування даних (POST)
     [HttpPost]
     [Authorize]
     [ValidateAntiForgeryToken]
@@ -219,7 +214,6 @@ public class AccountController : Controller
         var userId = int.Parse(User.FindFirstValue("UserId"));
         var user = await _context.Customers.FindAsync(userId);
 
-        // Оновлюємо ТІЛЬКИ дозволені поля
         user.FullName = model.FullName;
         user.Email = model.Email;
         user.BirthDate = model.BirthDate;
@@ -228,7 +222,6 @@ public class AccountController : Controller
         return RedirectToAction("Profile");
     }
 
-    // 4. Завантаження аватарки
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> UploadAvatar(IFormFile avatarFile)

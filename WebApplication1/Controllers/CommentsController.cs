@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 
 namespace Concert.Controllers
 {
-    // Клас обов'язково має успадковувати Controller
     public class CommentsController : Controller
     {
         private readonly ConcertContext _context;
 
-        // Конструктор: тут ми отримуємо доступ до нашої бази даних (_context)
         public CommentsController(ConcertContext context)
         {
             _context = context;
@@ -20,16 +18,13 @@ namespace Concert.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int concertId, string text)
         {
-            // Шукаємо ID саме за тим ключем, який ти задала в AccountController
             var userIdClaim = User.FindFirst("UserId");
 
-            // Якщо користувач не залогінений або коментар порожній
             if (userIdClaim == null || string.IsNullOrWhiteSpace(text))
             {
                 return RedirectToAction("Details", "Concerts", new { id = concertId });
             }
 
-            // Створюємо коментар
             Concert.Models.Comment newComment = new Concert.Models.Comment
             {
                 ConcertId = concertId,
@@ -38,11 +33,9 @@ namespace Concert.Controllers
                 CreatedAt = DateTime.UtcNow
             };
 
-            // Зберігаємо
             _context.Comments.Add(newComment);
             await _context.SaveChangesAsync();
 
-            // Повертаємося
             return RedirectToAction("Details", "Concerts", new { id = concertId });
         }
         [HttpPost]
@@ -55,7 +48,6 @@ namespace Concert.Controllers
 
             var userId = User.FindFirst("UserId")?.Value;
 
-            // ТІЛЬКИ автор може редагувати свій коментар
             if (userId != null && comment.CustomerId.ToString() == userId)
             {
                 comment.Text = newText;
@@ -76,7 +68,6 @@ namespace Concert.Controllers
             var userId = User.FindFirst("UserId")?.Value;
             bool isAdmin = User.IsInRole("Admin");
 
-            // Видалити може АБО автор, АБО адмін
             if (isAdmin || (userId != null && comment.CustomerId.ToString() == userId))
             {
                 _context.Comments.Remove(comment);

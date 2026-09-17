@@ -144,7 +144,6 @@
                     body.innerHTML += `<tr><td>${d.monthLabel}</td><td class="text-success">${d.earnedRevenue.toLocaleString()}</td><td class="text-danger">${d.lostRevenue.toLocaleString()}</td></tr>`;
                 });
 
-                // Стовпчиковий графік
                 new google.visualization.ColumnChart(document.getElementById('lostChart')).draw(dt, {
                     backgroundColor: 'transparent', colors: ['#10b981', '#ef4444'],
                     legend: { textStyle: { color: '#fff' }, position: 'top' },
@@ -153,7 +152,6 @@
                     chartArea: { width: '80%', height: '75%' }
                 });
 
-                // Кругова діаграма
                 const pieDt = google.visualization.arrayToDataTable([
                     ['Статус', 'Сума'],
                     ['Зароблено', totalE],

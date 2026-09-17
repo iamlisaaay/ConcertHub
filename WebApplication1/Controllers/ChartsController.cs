@@ -69,7 +69,6 @@ namespace Concert.Controllers
         {
             if (startDate.HasValue) startDate = DateTime.SpecifyKind(startDate.Value, DateTimeKind.Utc);
             if (endDate.HasValue) endDate = DateTime.SpecifyKind(endDate.Value, DateTimeKind.Utc);
-            // ======================
             var query = _context.Tickets.Include(t => t.Concert).Where(t => t.Concert.DateTime.HasValue);
 
             if (groupId.HasValue && groupId.Value > 0)

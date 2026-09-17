@@ -1,2 +1,40 @@
-WebApplication1/wwwroot/videos/concerts/Dandeloin.mp4
-WebApplication1/wwwroot/videos/concerts/MASQUERADE.mp4
+## =====================================
+## Скомпільований код та артефакти білду
+## =====================================
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## =====================================
+## Файли Visual Studio, Rider та VS Code
+## =====================================
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## =====================================
+## Конфігурації з локальними секретами / розробкою
+## =====================================
+# Якщо в Development лежать ваші локальні паролі до БД:
+appsettings.Development.json
+
+## =====================================
+## Медіа-файли користувачів (завантажені аватарки/картинки)
+## =====================================
+# Щоб чужі або тестові фотографії з wwwroot не потрапляли в коміти:
+wwwroot/images/avatars/*
+!wwwroot/images/avatars/.gitkeep
+
+## =====================================
+## Кеш пакетів та сертифікати
+## =====================================
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.pfx
+*.publishsettings

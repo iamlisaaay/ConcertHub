@@ -98,13 +98,11 @@ public partial class ConcertContext : DbContext
             entity.ToTable("comments");
 
             entity.HasOne(d => d.Customer)
-                .WithMany() // Це залишається порожнім, бо у Customer поки немає списку коментарів
-                .HasForeignKey(d => d.CustomerId)
+                .WithMany()                .HasForeignKey(d => d.CustomerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.Concert)
-                .WithMany(p => p.Comments) // <--- ОСЬ ЦЕ ГОЛОВНЕ! (Додай p => p.Comments)
-                .HasForeignKey(d => d.ConcertId)
+                .WithMany(p => p.Comments)                .HasForeignKey(d => d.ConcertId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
 

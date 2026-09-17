@@ -37,7 +37,6 @@ namespace Concert.Controllers
         {
             if (id == null) return NotFound();
 
-            // 1. Отримуємо групу з усіма зв'язками
             var @group = await _context.Groups
                 .Include(g => g.Concerts)
                     .ThenInclude(c => c.Venue)
@@ -47,7 +46,6 @@ namespace Concert.Controllers
 
             if (@group == null) return NotFound();
 
-            // 2. Отримуємо коментарі до ВСІХ концертів, де брав участь цей гурт
             var comments = await _context.Comments
                 .Include(c => c.Customer)
                 .Include(c => c.Concert)
@@ -55,7 +53,6 @@ namespace Concert.Controllers
                 .OrderByDescending(c => c.CreatedAt)
                 .ToListAsync();
 
-            // 3. Передаємо коментарі у View через ViewBag або ViewModel
             ViewBag.GroupComments = comments;
 
             return View(@group);

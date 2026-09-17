@@ -409,11 +409,9 @@
 </div>
 @section Scripts {
     <script>
-        // Перевіряємо, чи є на сторінці відео
         var videoIdInput = document.getElementById('hiddenYoutubeId');
         
         if (videoIdInput && videoIdInput.value) {
-            // 1. Підключаємо офіційний API YouTube
             var tag = document.createElement('script');
             tag.src = "https://www.youtube.com/iframe_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -421,29 +419,24 @@
 
             var player;
             
-            // 2. Ця функція викликається автоматично, коли API завантажиться
             function onYouTubeIframeAPIReady() {
                 player = new YT.Player('yt-background', {
-                    videoId: videoIdInput.value, // Беремо ID нашого відео
-                    playerVars: {
+                    videoId: videoIdInput.value,                    playerVars: {
                         'autoplay': 1,
                         'controls': 0,
                         'disablekb': 1,
                         'loop': 1,
-                        'playlist': videoIdInput.value, // Потрібно для зациклення
-                        'mute': 1,
+                        'playlist': videoIdInput.value,                        'mute': 1,
                         'playsinline': 1,
                         'rel': 0,
                         'showinfo': 0,
                         'modestbranding': 1
                     },
                     events: {
-                        // Коли плеєр готовий - ЖОРСТКО вимикаємо звук і тиснемо Play
                         'onReady': function(event) {
                             event.target.mute();
                             event.target.playVideo();
                         },
-                        // Якщо відео чомусь зупинилось (наприклад, після буферизації), знову тиснемо Play
                         'onStateChange': function(event) {
                             if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
                                 event.target.playVideo();

@@ -4,10 +4,8 @@
 
 namespace Concert.Migrations
 {
-    /// <inheritdoc />
     public partial class AddNewFields : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
@@ -54,7 +52,6 @@ namespace Concert.Migrations
                 oldType: "text");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(

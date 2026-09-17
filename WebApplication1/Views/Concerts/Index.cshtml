@@ -4,7 +4,6 @@
     ViewData["Title"] = "Концерти";
     var now = DateTime.Now;
     
-    // Делим массив на 2 части и сразу сортируем
     var upcomingConcerts = Model.Where(c => c.DateTime >= now).OrderBy(c => c.DateTime).ToList();
     var pastConcerts = Model.Where(c => c.DateTime < now).OrderByDescending(c => c.DateTime).ToList();
 }
